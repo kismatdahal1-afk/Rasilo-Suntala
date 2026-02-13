@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रसिलो सुन्तला - Rasilo Suntala Farm</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-container">
+                    <img src="images/logo1.jpeg" alt="Rasilo Suntala" class="logo-image">
+                    <span class="logo-text">रसिलो सुन्तला</span>
+                </div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="#products">Products</a>
+                <a href="blog.html">Blog</a>
+                <!-- Language Dropdown -->
+                <div class="language-dropdown">
+                    <button class="lang-btn"><i class="fas fa-globe"></i> Language <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="changeLanguage('nepali')">नेपाली</a>
+                        <a href="#" onclick="changeLanguage('english')">English</a>
+                        <a href="#" onclick="changeLanguage('bhojpuri')">भोजपुरी</a>
+                    </div>
+                </div>
+                <a href="admin.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a>
+                <a href="#" onclick="openAboutModal()" class="about-link">About</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAboutModal()">&times;</span>
+            <h2>About Rasilo Suntala</h2>
+            <div class="about-content">
+                <img src="images/logo1.jpeg" alt="Rasilo Suntala Logo" class="about-logo">
+                <p><strong>रसिलो सुन्तला</strong> is a family-owned organic orange farm located in the beautiful hills of Makpa-7, Khotang Nepal.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-leaf"></i>
+                        <span>100% Organic Farming</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-truck"></i>
+                        <span>Farm Fresh Delivery</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Direct from Farmers</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Established 2010</span>
+                    </div>
+                </div>
+                <p class="about-creator">🌐 Website developed by <strong>Kismat Dahal</strong></p>
+                <p class="about-contact">📞 9764250274 | 📧 kismatdahal1@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section - Fixed Gap Issue -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="green-box"></div>
+            <div class="farm-image">
+                <img src="images/hero.jpeg" alt="Rasilo Suntala Farm">
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text-wrapper">
+                <div class="hero-logo-title">
+                    <img src="images/logo1.jpeg" alt="Rasilo Suntala" class="hero-logo animate-spin">
+                    <h1 class="animate-text"><span class="rasilo">रसिलो</span> <span class="suntala">सुन्तला</span></h1>
+                </div>
+                <p class="slogan animate-slide">"माक्पाको माटो, रसिलो स्वादमा: सिधै बारीबाट तपाईंको हातमा।"</p>
+                <p class="sub-slogan animate-fade">जैविक, ताजा र मीठो · सिधै हाम्रो फार्मबाट तपाईंको घरसम्म।</p>
+                <div class="contact-info-hero animate-pop">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>9764250274</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>kismatdahal1@gmail.com</span>
+                    </div>
+                </div>
+                <button class="order-now-btn animate-pulse" onclick="scrollToOrder()">Order Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Buy From Us Section -->
+    <section class="why-buy">
+        <h2 class="lang-why">Why Buy From Us?</h2>
+        <div class="features">
+            <div class="feature card-organic">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="lang-organic">100% Organic</h3>
+                <p class="lang-organic-desc">No pesticides, naturally grown in the hills of Makpa</p>
+            </div>
+            <div class="feature card-fresh">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="lang-fresh">Farm Fresh</h3>
+                <p class="lang-fresh-desc">Picked and delivered within 24 hours</p>
+            </div>
+            <div class="feature card-direct">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3 class="lang-direct">Direct from Farm</h3>
+                <p class="lang-direct-desc">No middlemen, fair prices directly from farmers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="lang-products">Our Orange Packages</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="images/orange1.jpeg" alt="Fresh Oranges">
+                <h3>Junior Pack</h3>
+                <p>2 KG - Perfect for small families</p>
+                <div class="price">रू 100</div>
+                <div class="quantity-badge">2<span>kg</span></div>
+                <button onclick="setQuantity(2)" class="select-btn">Select</button>
+            </div>
+            <div class="product-card">
+                <img src="images/orange2.jpeg" alt="Premium Oranges">
+                <h3>Family Pack</h3>
+                <p>5 KG - Best value for families</p>
+                <div class="price">रू 500</div>
+                <div class="quantity-badge">5<span>kg</span></div>
+                <button onclick="setQuantity(5)" class="select-btn">Select</button>
+            </div>
+            <div class="product-card">
+                <img src="images/orange3.jpeg" alt="Organic Oranges">
+                <h3>Bulk Pack</h3>
+                <p>10 KG - For gatherings & events</p>
+                <div class="price">रू 1000</div>
+                <div class="quantity-badge">10<span>kg</span></div>
+                <button onclick="setQuantity(10)" class="select-btn">Select</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="order" class="order-section">
+        <h2 class="lang-order">Place Your Order</h2>
+        <div class="order-container">
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="name" class="lang-name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="lang-phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="98XXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity" class="lang-quantity">Quantity (KG) *</label>
+                    <input type="number" id="quantity" name="quantity" min="1" step="0.5" required placeholder="Enter quantity in KG">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address" class="lang-address">Delivery Address *</label>
+                    <textarea id="address" name="address" required placeholder="Enter your complete address"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="delivery-date" class="lang-delivery-date">Preferred Delivery Date *</label>
+                        <input type="date" id="delivery-date" name="delivery-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="delivery-time" class="lang-delivery-time">Preferred Time Slot *</label>
+                        <select id="delivery-time" name="delivery-time" required>
+                            <option value="">Select time slot</option>
+                            <option value="9:00 AM - 11:00 AM">9:00 AM - 11:00 AM</option>
+                            <option value="11:00 AM - 1:00 PM">11:00 AM - 1:00 PM</option>
+                            <option value="1:00 PM - 3:00 PM">1:00 PM - 3:00 PM</option>
+                            <option value="3:00 PM - 5:00 PM">3:00 PM - 5:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-order-btn lang-submit">Submit Order</button>
+            </form>
+            <div id="orderMessage" class="order-message"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container footer-logo">
+                    <img src="images/logo1.jpeg" alt="Rasilo Suntala" class="logo-image-small">
+                    <span class="logo-text footer-text">रसिलो सुन्तला</span>
+                </div>
+                <p class="lang-footer-desc">Fresh organic oranges from the hills of Makpa</p>
+                <p class="lang-footer-desc">Khotang</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="lang-contact">Contact</h3>
+                <p><i class="fas fa-phone"></i> 9764250274</p>
+                <p><i class="fas fa-envelope"></i> kismatdahal1@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="lang-quick-links">Quick Links</h3>
+                <a href="index.html" class="lang-home">Home</a>
+                <a href="#products" class="lang-products-link">Products</a>
+                <a href="blog.html" class="lang-blog">Blog</a>
+                <a href="#" onclick="openAboutModal()" class="lang-about">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Rasilo Suntala Farm. All rights reserved.</p>
+        </div>
+    </footer>
+<!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

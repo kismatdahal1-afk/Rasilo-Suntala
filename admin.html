@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Rasilo Suntala</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-container">
+                    <img src="images/logo1.jpeg" alt="Rasilo Suntala" class="logo-image">
+                    <span class="logo-text">रसिलो सुन्तला</span>
+                </div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="#products">Products</a>
+                <a href="blog.html">Blog</a>
+                <!-- Language Dropdown -->
+                <div class="language-dropdown">
+                    <button class="lang-btn"><i class="fas fa-globe"></i> Language <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="changeLanguage('nepali')">नेपाली</a>
+                        <a href="#" onclick="changeLanguage('english')">English</a>
+                        <a href="#" onclick="changeLanguage('bhojpuri')">भोजपुरी</a>
+                    </div>
+                </div>
+                <a href="admin.html" class="active admin-link"><i class="fas fa-lock"></i> Admin</a>
+                <a href="#" onclick="openAboutModal()" class="about-link">About</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAboutModal()">&times;</span>
+            <h2>About Rasilo Suntala</h2>
+            <div class="about-content">
+                <img src="images/logo1.jpeg" alt="Rasilo Suntala Logo" class="about-logo">
+                <p><strong>रसिलो सुन्तला</strong> is a family-owned organic orange farm located in the beautiful hills of Makpa-7, Khotang Nepal.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-leaf"></i>
+                        <span>100% Organic Farming</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-truck"></i>
+                        <span>Farm Fresh Delivery</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Direct from Farmers</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Established 2010</span>
+                    </div>
+                </div>
+                <p class="about-creator">🌐 Website developed by <strong>Kismat Dahal</strong></p>
+                <p class="about-contact">📞 9764250274 | 📧 kismatdahal1@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-dashboard">
+        <div class="dashboard-header">
+            <h1 class="lang-admin-dashboard">Admin Dashboard</h1>
+            <button onclick="logoutAdmin()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> <span class="lang-logout">Logout</span>
+            </button>
+        </div>
+        
+        <!-- Admin Login (Initially Hidden) -->
+        <div id="loginSection" class="login-section">
+            <div class="login-box">
+                <h2 class="lang-login">Admin Login</h2>
+                <p class="lang-login-desc">Enter your password to view orders</p>
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+                <button onclick="checkAdminLogin()" class="login-btn lang-login">Login</button>
+               
+            </div>
+        </div>
+        
+        <!-- Dashboard Content (Hidden until login) -->
+        <div id="dashboardContent" class="dashboard-content hidden">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="summary-details">
+                        <h3 class="lang-total-orders">Total Orders</h3>
+                        <p id="totalOrders">0</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="summary-details">
+                        <h3 class="lang-pending-delivery">Pending Delivery</h3>
+                        <p id="pendingOrders">0</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <div class="summary-details">
+                        <h3 class="lang-pending-kg">Pending KG</h3>
+                        <p id="pendingKg">0</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="summary-details">
+                        <h3 class="lang-delivered">Delivered</h3>
+                        <p id="deliveredOrders">0</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <div class="summary-details">
+                        <h3 class="lang-sold-kg">Sold KG</h3>
+                        <p id="totalKg">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Orders Table -->
+            <div class="orders-table-container">
+                <h2 class="lang-customer-orders">Customer Orders</h2>
+                <div class="table-responsive">
+                    <table id="ordersTable">
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th class="lang-order-date">Order Date</th>
+                                <th class="lang-customer-name">Customer Name</th>
+                                <th class="lang-phone">Phone</th>
+                                <th class="lang-address">Address</th>
+                                <th class="lang-quantity">Quantity (KG)</th>
+                                <th class="lang-order-amount">Order Amount</th>
+                                <th class="lang-sold-amount">Sold Amount</th>
+                                <th class="lang-delivery-date">Delivery Date</th>
+                                <th class="lang-time-slot">Time Slot</th>
+                                <th class="lang-status">Status</th>
+                                <th class="lang-action">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Orders will be populated here -->
+                        </tbody>
+                        <tfoot id="ordersTableFooter">
+                            <!-- Summary totals will be shown here -->
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container footer-logo">
+                    <img src="images/logo1.jpeg" alt="Rasilo Suntala" class="logo-image-small">
+                    <span class="logo-text footer-text">रसिलो सुन्तला</span>
+                </div>
+                <p class="lang-footer-desc">Fresh organic oranges from the hills of Makpa</p>
+                <p class="lang-footer-desc">Khotang</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="lang-contact">Contact</h3>
+                <p><i class="fas fa-phone"></i> 9764250274</p>
+                <p><i class="fas fa-envelope"></i> kismatdahal1@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="lang-quick-links">Quick Links</h3>
+                <a href="index.html" class="lang-home">Home</a>
+                <a href="#products" class="lang-products-link">Products</a>
+                <a href="blog.html" class="lang-blog">Blog</a>
+                <a href="#" onclick="openAboutModal()" class="lang-about">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Rasilo Suntala Farm. All rights reserved.</p>
+        </div>
+    </footer>
+ <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="admin.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
