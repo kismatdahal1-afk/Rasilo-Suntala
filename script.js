@@ -647,19 +647,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // ===== CORRECT PRICE CALCULATION BASED ON YOUR PRICING =====
             let totalAmount = 0;
             
-            // Calculate based on your package prices
-            if (quantity === 1) {
-                totalAmount = 100;      // 1kg = ₹100
-            } else if (quantity === 2) {
-                totalAmount = 200;      // 2kg = ₹200 (2 × ₹100)
+            // Check if quantity matches package prices
+            if (quantity === 2) {
+                totalAmount = 200;      // 2kg package price
             } else if (quantity === 5) {
-                totalAmount = 500;      // 5kg = ₹500
+                totalAmount = 500;      // 5kg package price
             } else if (quantity === 10) {
-                totalAmount = 1000;     // 10kg = ₹1000
+                totalAmount = 1000;     // 10kg package price
             } else {
-                // For other quantities, calculate proportionally
-                // Using rate: ₹100 per kg
-                totalAmount = quantity * 100;
+                // For custom quantities (like 6.7 kg), calculate at ₹100 per kg
+                totalAmount = Math.round(quantity * 100);
             }
             
             // Get form values
@@ -678,8 +675,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 timestamp: new Date().getTime()
             };
             
-            // ... rest of the code continues ...
-            
             // Validate phone number (Nepal format)
             const phoneRegex = /^(98|97)[0-9]{8}$/;
             if (!phoneRegex.test(orderData.phone)) {
@@ -696,10 +691,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Save to localStorage
             localStorage.setItem('orders', JSON.stringify(orders));
             
-            // ============================================
-            // SEND EMAIL NOTIFICATION - ADD THIS LINE
-            // ============================================
-            sendEmailNotification(orderData);  // Send email notification to farm owner
+            // Send email notification to farm owner
+            sendEmailNotification(orderData);
             
             // Show success message
             showMessage('Order placed successfully! We will contact you soon.', 'success');

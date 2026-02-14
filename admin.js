@@ -1,8 +1,8 @@
 // Admin authentication
 const ADMIN_PASSWORD = 'admin123';
 
-// Price per KG
-const PRICE_PER_KG = 200;
+// Price per KG for custom quantities
+const PRICE_PER_KG = 100;
 
 // Check if admin is logged in
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,7 +25,7 @@ function checkAdminLogin() {
         showDashboard();
         loadOrders();
     } else {
-        alert('Incorrect password! Hint: admin123');
+        alert('Incorrect password!');
     }
 }
 
@@ -56,6 +56,23 @@ function loadOrders() {
     updateSummary(orders);
 }
 
+// Calculate order amount based on quantity
+function calculateOrderAmount(quantity) {
+    quantity = parseFloat(quantity || 0);
+    
+    // Check if quantity matches package prices
+    if (quantity === 2) {
+        return 200;      // 2kg package price
+    } else if (quantity === 5) {
+        return 500;      // 5kg package price
+    } else if (quantity === 10) {
+        return 1000;     // 10kg package price
+    } else {
+        // For custom quantities, calculate at ₹100 per kg
+        return Math.round(quantity * PRICE_PER_KG);
+    }
+}
+
 // Display orders in table
 function displayOrders(orders) {
     const tableBody = document.getElementById('ordersTableBody');
@@ -80,14 +97,7 @@ function displayOrders(orders) {
         // Calculate order amount if not present
         let orderAmount = order.orderAmount;
         if (!orderAmount) {
-            const quantity = parseFloat(order.quantity || 0);
-            let pricePerKg = PRICE_PER_KG;
-            if (quantity >= 10) {
-                pricePerKg = 180;
-            } else if (quantity >= 5) {
-                pricePerKg = 190;
-            }
-            orderAmount = Math.round(quantity * pricePerKg);
+            orderAmount = calculateOrderAmount(order.quantity);
         }
         
         // Calculate sold amount (only if delivered)
@@ -159,14 +169,7 @@ function updateOrderStatus(orderId, isDelivered) {
         
         // If delivered, set sold amount equal to order amount
         if (isDelivered) {
-            const quantity = parseFloat(orders[orderIndex].quantity || 0);
-            let pricePerKg = PRICE_PER_KG;
-            if (quantity >= 10) {
-                pricePerKg = 180;
-            } else if (quantity >= 5) {
-                pricePerKg = 190;
-            }
-            orders[orderIndex].soldAmount = Math.round(quantity * pricePerKg);
+            orders[orderIndex].soldAmount = calculateOrderAmount(orders[orderIndex].quantity);
         } else {
             orders[orderIndex].soldAmount = 0;
         }
@@ -214,18 +217,4 @@ function formatDate(dateString) {
     if (!dateString) return 'N/A';
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
-}
-
-// Calculate order amount
-function calculateOrderAmount(quantity) {
-    quantity = parseFloat(quantity || 0);
-    let pricePerKg = PRICE_PER_KG;
-    
-    if (quantity >= 10) {
-        pricePerKg = 180; // 10% discount
-    } else if (quantity >= 5) {
-        pricePerKg = 190; // 5% discount
-    }
-    
-    return Math.round(quantity * pricePerKg);
 }
